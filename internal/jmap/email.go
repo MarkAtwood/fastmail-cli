@@ -437,6 +437,11 @@ func (c *Client) GetKeywords(emailID string) ([]string, error) {
 	return keywords, nil
 }
 
+// SetFlagged stars or unstars an email.
+func (c *Client) SetFlagged(emailID string, flagged bool) error {
+	return c.SetKeyword(emailID, "$flagged", flagged)
+}
+
 // SnoozeEmail snoozes an email until a specified time.
 func (c *Client) SnoozeEmail(emailID string, until string) error {
 	session, err := c.GetSession()

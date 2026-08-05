@@ -31,6 +31,8 @@ func NewCmdEmail(f *cmdutil.Factory) *cobra.Command {
 	cmd.AddCommand(NewCmdLabel(f))
 	cmd.AddCommand(NewCmdSnooze(f))
 	cmd.AddCommand(NewCmdUnsnooze(f))
+	cmd.AddCommand(NewCmdStar(f))
+	cmd.AddCommand(NewCmdUnstar(f))
 
 	return cmd
 }
