@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/marckohlbrugge/fastmail-cli/internal/cmdutil"
 	"github.com/spf13/cobra"
@@ -83,11 +84,12 @@ func runDownload(f *cmdutil.Factory, opts *downloadOptions, emailID, blobID stri
 	}
 
 	// Expand home directory if needed
-	if len(outputPath) > 0 && outputPath[0] == '~' {
+	if strings.HasPrefix(outputPath, "~/") {
 		home, err := os.UserHomeDir()
-		if err == nil {
-			outputPath = filepath.Join(home, outputPath[1:])
+		if err != nil {
+			return fmt.Errorf("cannot expand ~: %w", err)
 		}
+		outputPath = filepath.Join(home, outputPath[2:])
 	}
 
 	// Download the blob
