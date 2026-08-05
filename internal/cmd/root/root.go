@@ -9,6 +9,7 @@ import (
 	"github.com/marckohlbrugge/fastmail-cli/internal/cmd/attachment"
 	"github.com/marckohlbrugge/fastmail-cli/internal/cmd/auth"
 	"github.com/marckohlbrugge/fastmail-cli/internal/cmd/completion"
+	"github.com/marckohlbrugge/fastmail-cli/internal/cmd/contacts"
 	"github.com/marckohlbrugge/fastmail-cli/internal/cmd/describe"
 	"github.com/marckohlbrugge/fastmail-cli/internal/cmd/draft"
 	"github.com/marckohlbrugge/fastmail-cli/internal/cmd/email"
@@ -81,6 +82,10 @@ func NewCmdRoot(f *cmdutil.Factory) *cobra.Command {
 		Title: "Identity commands",
 	})
 	cmd.AddGroup(&cobra.Group{
+		ID:    "contacts",
+		Title: "Contacts commands",
+	})
+	cmd.AddGroup(&cobra.Group{
 		ID:    "utility",
 		Title: "Utility commands",
 	})
@@ -106,6 +111,9 @@ func NewCmdRoot(f *cmdutil.Factory) *cobra.Command {
 
 	// Identity subcommands
 	cmd.AddCommand(identity.NewCmdIdentity(f))
+
+	// Contacts subcommands
+	cmd.AddCommand(contacts.NewCmdContacts(f))
 
 	// Utility commands
 	cmd.AddCommand(version.NewCmdVersion(f, Version))
